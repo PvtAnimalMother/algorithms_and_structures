@@ -1,29 +1,22 @@
-const arr = [
-  0, 3, 2, 5, 6, 8, 23, 9, 4, 2, 1, 2, 9, 6, 4, 1, 7, -1, -5, 23, 6, 2, 35, 6,
-  3, 32, 9, 4, 2, 1, 2, 9, 6, 4, 1, 7, -1, -5, 23, 9, 4, 2, 1, 2, 9, 6, 4, 1, 7,
-  -1, -5, 23,
-];
-let count = 0;
-
 const quickSort = (array) => {
   if (array.length <= 1) {
+    // если длина массива 1 или меньше, то возвращаем массив
     return array;
   }
-  let pivotIndex = Math.floor(array.length / 2);
-  let pivot = array[pivotIndex];
-  let less = [];
-  let greater = [];
+  let pivotIndex = Math.floor(array.length / 2); // индекс опорного элемента
+  let pivot = array[pivotIndex]; // опорный элемент
+  let less = []; // массив чисел меньше опорного
+  let greater = []; // массив чисел больше опорного
   for (let i = 0; i < array.length; i++) {
-    count += 1;
+    // если индекс итерации = индексу опорной точки - пропускаем итерацию
     if (i === pivotIndex) continue;
     if (array[i] < pivot) {
+      // если значение меньше опорного - добавляем  less
       less.push(array[i]);
     } else {
-      greater.push(array[i]);
+      greater.push(array[i]); // обратный случай
     }
   }
+  // рекурсивно разворачиваем массивы и возвращаем
   return [...quickSort(less), pivot, ...quickSort(greater)];
 };
-
-console.log(quickSort(arr));
-console.log("count", count);
